@@ -1,35 +1,37 @@
-﻿using EclipseWorks.Application._Shared.Models;
+﻿using EclipseWorks.Application._Shared.Handlers;
+using EclipseWorks.Application._Shared.Models;
 using EclipseWorks.Application.Tasks.Commands;
-using EclipseWorks.Application.Tasks.Models;
+using EclipseWorks.Domain._Shared.Interfaces.UOW;
 using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain._Shared.Specifications;
 using EclipseWorks.Domain.Projects.Entities;
 using EclipseWorks.Domain.Projects.Interfaces;
 using EclipseWorks.Domain.Tasks.Entities;
 using EclipseWorks.Domain.Tasks.Interfaces;
-using MediatR;
 
 namespace EclipseWorks.Application.Tasks.Handlers
 {
-    internal class CreateTaskCommandHandler : IRequestHandler<CreateTaskCommand, Response>
+    internal class CreateTaskCommandHandler : BaseCommandHandler<CreateTaskCommand, Response>
     {
         private readonly IQueryProjectRepository queryProjectRepository;
         private readonly ICommandTaskRepository commandTaskRepository;
 
-        public CreateTaskCommandHandler(IQueryProjectRepository queryProjectRepository, ICommandTaskRepository commandTaskRepository)
+        public CreateTaskCommandHandler(IQueryProjectRepository queryProjectRepository, ICommandTaskRepository commandTaskRepository, IUnitOfWork uow)
+             : base(uow) 
         {
             this.queryProjectRepository = queryProjectRepository;
             this.commandTaskRepository = commandTaskRepository;
         }
 
-        public async Task<Response> Handle(CreateTaskCommand request, CancellationToken cancellationToken)
+        protected override async Task<Response> TryHandle(CreateTaskCommand request, CancellationToken cancellationToken)
         {
             ProjectEntity project = await queryProjectRepository.GetAsync(GetByIdSpecification<ProjectEntity>.Create(request.Body.ProjectId),
                                                                           cancellationToken);
             
-            ValidationObject<Domain._Shared.Models.Unit> addTaskEligibility = project.VerifyAddTaskEligibility();
+            ValidationObject<Unit> addTaskEligibility = project.VerifyAddTaskEligibility();
             if(addTaskEligibility.HasIssue)
             {
+                await unitOfWork.RollbackTrasactionAsync();
                 return addTaskEligibility.Issue;
             }
 
@@ -39,10 +41,12 @@ namespace EclipseWorks.Application.Tasks.Handlers
                                                                                 project);
             if(taskCreation.HasIssue)
             {
+                await unitOfWork.RollbackTrasactionAsync();
                 return taskCreation.Issue;
             }
 
             TaskEntity task = await commandTaskRepository.InsertAsync(taskCreation.Entity, cancellationToken);
+            await unitOfWork.CommitTransactionAsync();
             return Response.FromData(task.Id);
         }
     }

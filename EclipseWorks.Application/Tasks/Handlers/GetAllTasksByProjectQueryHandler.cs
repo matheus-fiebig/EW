@@ -1,4 +1,5 @@
-﻿using EclipseWorks.Application._Shared.Models;
+﻿using EclipseWorks.Application._Shared.Handlers;
+using EclipseWorks.Application._Shared.Models;
 using EclipseWorks.Application.Tasks.Models;
 using EclipseWorks.Application.Tasks.Queries;
 using EclipseWorks.Domain._Shared.Constants;
@@ -6,11 +7,10 @@ using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain.Tasks.Entities;
 using EclipseWorks.Domain.Tasks.Interfaces;
 using EclipseWorks.Domain.Tasks.Specifications;
-using MediatR;
 
 namespace EclipseWorks.Application.Tasks.Handlers
 {
-    public class GetAllTasksByProjectQueryHandler : IRequestHandler<GetAllTasksByProjectQuery, Response>
+    public class GetAllTasksByProjectQueryHandler : BaseQueryHandler<GetAllTasksByProjectQuery, Response>
     {
         private readonly IQueryTaskRepository queryTaskRepository;
 
@@ -19,7 +19,7 @@ namespace EclipseWorks.Application.Tasks.Handlers
             this.queryTaskRepository = queryTaskRepository;
         }
 
-        public async Task<Response> Handle(GetAllTasksByProjectQuery request, CancellationToken cancellationToken)
+        protected override async Task<Response> TryHandle(GetAllTasksByProjectQuery request, CancellationToken cancellationToken)
         {
             if(request == default)
             {

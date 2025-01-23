@@ -1,8 +1,10 @@
-﻿using EclipseWorks.Application._Shared.Models;
+﻿using EclipseWorks.Application._Shared.Handlers;
+using EclipseWorks.Application._Shared.Models;
 using EclipseWorks.Application.Commentaries.Commands;
 using EclipseWorks.Application.Commentaries.Models;
 using EclipseWorks.Domain._Shared.Constants;
 using EclipseWorks.Domain._Shared.Interfaces.Specification;
+using EclipseWorks.Domain._Shared.Interfaces.UOW;
 using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain._Shared.Specifications;
 using EclipseWorks.Domain.Tasks.Entities;
@@ -11,34 +13,39 @@ using MediatR;
 
 namespace EclipseWorks.Application.Commentaries.Handlers
 {
-    public class AddCommentaryCommandHandler : IRequestHandler<AddCommentaryCommand, Response>
+    public class AddCommentaryCommandHandler : BaseCommandHandler<AddCommentaryCommand, Response>
     {
         private readonly IQueryTaskRepository queryTaskRepository;
         private readonly ICommandTaskRepository commandTaskRepository;
 
-        public AddCommentaryCommandHandler(IQueryTaskRepository queryTaskRepository, ICommandTaskRepository commandTaskRepository)
+        public AddCommentaryCommandHandler(IQueryTaskRepository queryTaskRepository, ICommandTaskRepository commandTaskRepository, IUnitOfWork uow) 
+            : base(uow) 
         {
             this.queryTaskRepository = queryTaskRepository;
             this.commandTaskRepository = commandTaskRepository;
         }
 
-        public async Task<Response> Handle(AddCommentaryCommand request, CancellationToken cancellationToken)
+        protected override async Task<Response> TryHandle(AddCommentaryCommand request, CancellationToken cancellationToken)
         {
             ISpecification<TaskEntity> spec = GetByIdSpecification<TaskEntity>.Create(request.TaskId);
             TaskEntity task = await queryTaskRepository.GetAsync(spec, cancellationToken);
-            
-            if(task is null)
+
+            if (task is null)
             {
+                await unitOfWork.RollbackTrasactionAsync();
                 return Issue.CreateNew(ErrorConstants.TaskNotFoundCode, ErrorConstants.TaskNotFoundDesc);
             }
 
             ValidationObject<TaskEntity> validationObject = task.AddCommentary(request.Body.Commentary, request.Body.UserId);
-            if(validationObject.HasIssue)
+            if (validationObject.HasIssue)
             {
+                await unitOfWork.RollbackTrasactionAsync();
                 return validationObject.Issue;
             }
 
             var entity = await commandTaskRepository.UpdateAsync(validationObject.Entity, cancellationToken);
+            await unitOfWork.CommitTransactionAsync();
+
             return Response.FromData(CommentaryQueryResponse.ToModel(entity.Commentaries.LastOrDefault()));
         }
     }

@@ -1,15 +1,15 @@
-﻿using EclipseWorks.Application._Shared.Models;
+﻿using EclipseWorks.Application._Shared.Handlers;
+using EclipseWorks.Application._Shared.Models;
 using EclipseWorks.Application.Projects.Models;
 using EclipseWorks.Application.Projects.Queries;
 using EclipseWorks.Domain._Shared.Constants;
 using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain.Projects.Interfaces;
 using EclipseWorks.Domain.Projects.Specification;
-using MediatR;
 
 namespace EclipseWorks.Application.Projects.Handlers
 {
-    public class GetAllProjectsByUserQueryHandler : IRequestHandler<GetAllProjectsByUserQuery, Response>
+    public class GetAllProjectsByUserQueryHandler : BaseQueryHandler<GetAllProjectsByUserQuery, Response>
     {
         private readonly IQueryProjectRepository queryProjectRepository;
 
@@ -18,7 +18,7 @@ namespace EclipseWorks.Application.Projects.Handlers
             this.queryProjectRepository = queryProjectRepository;
         }
 
-        public async Task<Response> Handle(GetAllProjectsByUserQuery request, CancellationToken cancellationToken)
+        protected override async Task<Response> TryHandle(GetAllProjectsByUserQuery request, CancellationToken cancellationToken)
         {
             if (request.UserId == default)
             {
