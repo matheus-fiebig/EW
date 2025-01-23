@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("EclipseWorks.Domain")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2630dbb636c80a30fb61c542c5dc77a29ce9b719")]
 [assembly: System.Reflection.AssemblyProductAttribute("EclipseWorks.Domain")]
 [assembly: System.Reflection.AssemblyTitleAttribute("EclipseWorks.Domain")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

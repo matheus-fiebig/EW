@@ -1,24 +1,8 @@
 [
   {
-    "ContainingType": "EclipseWorks.Controllers.ProjectController",
-    "Method": "GetAllProjectsByUser",
-    "RelativePath": "api/v1/Project",
-    "HttpMethod": "GET",
-    "IsController": true,
-    "Order": 0,
-    "Parameters": [
-      {
-        "Name": "userId",
-        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
-      }
-    ],
-    "ReturnTypes": []
-  },
-  {
-    "ContainingType": "EclipseWorks.Controllers.ProjectController",
+    "ContainingType": "EclipseWorks.Controllers.ProjectsController",
     "Method": "Create",
-    "RelativePath": "api/v1/Project",
+    "RelativePath": "api/v1/Projects",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -32,9 +16,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EclipseWorks.Controllers.ProjectController",
+    "ContainingType": "EclipseWorks.Controllers.ProjectsController",
     "Method": "Delete",
-    "RelativePath": "api/v1/Project/{projectId}",
+    "RelativePath": "api/v1/Projects/{projectId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -48,25 +32,25 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EclipseWorks.Controllers.TaskController",
+    "ContainingType": "EclipseWorks.Controllers.ProjectsController",
     "Method": "GetAllTasksByProject",
-    "RelativePath": "api/v1/Task",
+    "RelativePath": "api/v1/Projects/{projectId}/tasks",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "projectId",
-        "Type": "System.Nullable\u00601[[System.Guid, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
-        "IsRequired": false
+        "Type": "System.Guid",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EclipseWorks.Controllers.TaskController",
+    "ContainingType": "EclipseWorks.Controllers.TasksController",
     "Method": "Create",
-    "RelativePath": "api/v1/Task",
+    "RelativePath": "api/v1/Tasks",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -80,9 +64,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EclipseWorks.Controllers.TaskController",
+    "ContainingType": "EclipseWorks.Controllers.TasksController",
     "Method": "Update",
-    "RelativePath": "api/v1/Task/{taskId}",
+    "RelativePath": "api/v1/Tasks/{taskId}",
     "HttpMethod": "PUT",
     "IsController": true,
     "Order": 0,
@@ -101,9 +85,9 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EclipseWorks.Controllers.TaskController",
+    "ContainingType": "EclipseWorks.Controllers.TasksController",
     "Method": "Delete",
-    "RelativePath": "api/v1/Task/{taskId}",
+    "RelativePath": "api/v1/Tasks/{taskId}",
     "HttpMethod": "DELETE",
     "IsController": true,
     "Order": 0,
@@ -117,29 +101,50 @@
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EclipseWorks.Controllers.TaskController",
+    "ContainingType": "EclipseWorks.Controllers.TasksController",
     "Method": "AddCommentary",
-    "RelativePath": "api/v1/Task/add-commentary",
+    "RelativePath": "api/v1/Tasks/{taskId}/add-commentary",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
+        "Name": "taskId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      },
+      {
         "Name": "request",
-        "Type": "EclipseWorks.Application.Tasks.Models.CreateTaskRequest",
+        "Type": "EclipseWorks.Application.Commentaries.Models.AddCommentaryRequest",
         "IsRequired": true
       }
     ],
     "ReturnTypes": []
   },
   {
-    "ContainingType": "EclipseWorks.Controllers.UserController",
+    "ContainingType": "EclipseWorks.Controllers.UsersController",
     "Method": "GetAllUsers",
-    "RelativePath": "api/v1/User",
+    "RelativePath": "api/v1/Users",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
     "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "EclipseWorks.Controllers.UsersController",
+    "Method": "GetAllProjects",
+    "RelativePath": "api/v1/Users/{userId}/projects",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.Guid",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": []
   }
 ]

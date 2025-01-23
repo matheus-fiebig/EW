@@ -66,7 +66,7 @@ namespace EclipseWorks.Domain.Tasks.Entities
 
         public ValidationObject<TaskEntity> AddCommentary(string commentary, Guid userId)
         {
-            var validationObject = CommentaryEntity.CreateNew(commentary, userId, Id);
+            var validationObject = CommentaryEntity.TryCreateNew(commentary, userId, Id);
             
             if(validationObject.HasIssue)
             {

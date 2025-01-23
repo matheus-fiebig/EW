@@ -25,7 +25,7 @@ namespace EclipseWorks.Domain.Commentaries.Entities
             
         }
 
-        public static ValidationObject<CommentaryEntity> CreateNew(string commentary, Guid userId, Guid taskId)
+        public static ValidationObject<CommentaryEntity> TryCreateNew(string commentary, Guid userId, Guid taskId)
         {
             if(string.IsNullOrEmpty(commentary))
             {
@@ -42,7 +42,7 @@ namespace EclipseWorks.Domain.Commentaries.Entities
                 return Issue.CreateNew(ErrorConstants.TaskNotFoundCode, ErrorConstants.TaskNotFoundDesc);
             }
 
-            return new CommentaryEntity { UserId = userId, TaskId = taskId, Description = commentary };
+            return new CommentaryEntity { UserId = userId, TaskId = taskId, Description = commentary, CreatedAt = DateTime.Now };
         }
     }
 }

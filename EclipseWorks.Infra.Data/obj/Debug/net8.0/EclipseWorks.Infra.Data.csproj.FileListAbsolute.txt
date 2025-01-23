@@ -15,3 +15,4 @@ C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.In
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.pdb
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.genruntimeconfig.cache
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\ref\EclipseWorks.Infra.Data.dll
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.sourcelink.json

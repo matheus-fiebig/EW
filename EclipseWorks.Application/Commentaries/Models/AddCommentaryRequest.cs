@@ -6,5 +6,5 @@ using System.Threading.Tasks;
 
 namespace EclipseWorks.Application.Commentaries.Models
 {
-    public sealed record AddCommentaryRequest(Guid TaskId, string Commentary, Guid UserId);
+    public sealed record AddCommentaryRequest(string Commentary, Guid UserId);
 }

@@ -17,3 +17,4 @@ C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.In
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.IOC\obj\Debug\net8.0\refint\EclipseWorks.Infra.IOC.dll
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.IOC\obj\Debug\net8.0\EclipseWorks.Infra.IOC.pdb
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.IOC\obj\Debug\net8.0\ref\EclipseWorks.Infra.IOC.dll
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.IOC\obj\Debug\net8.0\EclipseWorks.Infra.IOC.sourcelink.json

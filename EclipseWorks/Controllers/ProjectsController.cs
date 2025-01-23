@@ -11,22 +11,22 @@ namespace EclipseWorks.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class ProjectController : BaseController
+    public class ProjectsController : BaseController
     {
         private readonly ISender mediatr;
 
-        public ProjectController(ISender mediatr)
+        public ProjectsController(ISender mediatr)
         {
             this.mediatr = mediatr;
         }
 
         /// <summary>
-        /// Obtém todos os projetos filtrados
+        /// Obtém todas as tarefas de um determinado projeto
         /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> GetAllProjectsByUser([FromQuery] Guid? userId)
+        [HttpGet("{projectId}/tasks")]
+        public async Task<IActionResult> GetAllTasksByProject(Guid projectId)
         {
-            return await HandleResponse(async () => await mediatr.Send(new GetAllProjectsByUserQuery(userId)));
+            return await HandleResponse(async () => await mediatr.Send(new GetAllTasksByProjectQuery(projectId)));
         }
 
         /// <summary>
@@ -39,7 +39,7 @@ namespace EclipseWorks.Controllers
         }
 
         /// <summary>
-        /// Deleta uma tarefa
+        /// Deleta um projeto
         /// </summary>
         [HttpDelete("{projectId}")]
         public async Task<IActionResult> Delete(Guid projectId)

@@ -8,6 +8,8 @@ namespace EclipseWorks.Application.Tasks.Models
 {
     public class TaskQueryResponse
     {
+        public Guid Id { get; init; }
+
         public string Title { get; init; }
 
         public string Description { get; init; }
@@ -20,7 +22,7 @@ namespace EclipseWorks.Application.Tasks.Models
 
         public IEnumerable<CommentaryQueryResponse> Commentaries { get; init; }
 
-        public static IEnumerable<TaskQueryResponse> ToModel(List<TaskEntity> entities)
+        public static IEnumerable<TaskQueryResponse> ToModel(IEnumerable<TaskEntity> entities)
         {
             return entities.Select(e => ToModel(e));
         }
@@ -29,6 +31,7 @@ namespace EclipseWorks.Application.Tasks.Models
         {
             return new TaskQueryResponse()
             {
+                Id = e.Id,
                 Title = e.Title,
                 Description = e.Description,
                 DueDate = e.DueDate,

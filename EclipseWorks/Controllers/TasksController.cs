@@ -1,4 +1,6 @@
-﻿using EclipseWorks.Application.Tasks.Commands;
+﻿using EclipseWorks.Application.Commentaries.Commands;
+using EclipseWorks.Application.Commentaries.Models;
+using EclipseWorks.Application.Tasks.Commands;
 using EclipseWorks.Application.Tasks.Models;
 using EclipseWorks.Application.Tasks.Queries;
 using MediatR;
@@ -8,23 +10,15 @@ namespace EclipseWorks.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class TaskController : BaseController
+    public class TasksController : BaseController
     {
         private readonly ISender mediatr;
 
-        public TaskController(ISender mediatr)
+        public TasksController(ISender mediatr)
         {
             this.mediatr = mediatr;
         }
 
-        /// <summary>
-        /// Obtém todas as tarefas de um determinado projeto
-        /// </summary>
-        [HttpGet]
-        public async Task<IActionResult> GetAllTasksByProject([FromQuery] Guid? projectId)
-        {
-            return await HandleResponse(async () => await mediatr.Send(new GetAllTasksByProjectQuery(projectId)));
-        }
 
         /// <summary>
         /// Cria uma tarefa em determinado projeto
@@ -38,10 +32,10 @@ namespace EclipseWorks.Controllers
         /// <summary>
         /// Cria uma tarefa em determinado projeto
         /// </summary>
-        [HttpPost("add-commentary")]
-        public async Task<IActionResult> AddCommentary([FromBody] CreateTaskRequest request)
+        [HttpPost("{taskId}/add-commentary")]
+        public async Task<IActionResult> AddCommentary(Guid taskId, [FromBody] AddCommentaryRequest request)
         {
-            return await HandleResponse(async () => await mediatr.Send(new CreateTaskCommand(request)));
+            return await HandleResponse(async () => await mediatr.Send(new AddCommentaryCommand(taskId, request)));
         }
 
         /// <summary>

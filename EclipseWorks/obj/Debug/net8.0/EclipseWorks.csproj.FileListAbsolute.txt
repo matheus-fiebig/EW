@@ -184,3 +184,4 @@ C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks\ob
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks\obj\Debug\net8.0\EclipseWorks.genruntimeconfig.cache
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks\obj\Debug\net8.0\ref\EclipseWorks.dll
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks\obj\Debug\net8.0\EclipseWorks.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks\obj\Debug\net8.0\EclipseWorks.sourcelink.json

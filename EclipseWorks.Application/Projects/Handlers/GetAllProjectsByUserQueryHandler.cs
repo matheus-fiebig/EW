@@ -20,19 +20,19 @@ namespace EclipseWorks.Application.Projects.Handlers
 
         public async Task<Response> Handle(GetAllProjectsByUserQuery request, CancellationToken cancellationToken)
         {
-            if (!request.UserId.HasValue)
+            if (request.UserId == default)
             {
                 return Response.FromError(Issue.CreateNew(ErrorConstants.InvalidRequestCode, ErrorConstants.InvalidRequestDesc));
             }
 
-            var projects = await queryProjectRepository.GetPagedAsync(-1, -1, GetProjectByUserSpecification.Create(request.UserId.Value), cancellationToken);
+            var projects = await queryProjectRepository.GetPagedAsync(-1, -1, GetProjectByUserSpecification.Create(request.UserId), cancellationToken);
 
             if (!projects.Any())
             {
                 return Response.Empty();
             }
 
-            return Response.FromData(ProjectQueryResponse.ToModel(projects.ToList()));
+            return Response.FromData(ProjectQueryResponse.ToModel(projects));
         }
     }
 }

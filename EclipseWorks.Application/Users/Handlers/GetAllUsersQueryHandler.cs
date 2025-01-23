@@ -1,5 +1,7 @@
 ﻿using EclipseWorks.Application._Shared.Models;
+using EclipseWorks.Application.Users.Models;
 using EclipseWorks.Application.Users.Queries;
+using EclipseWorks.Domain.Users.Entities;
 using EclipseWorks.Domain.Users.Interfaces;
 using MediatR;
 
@@ -16,7 +18,8 @@ namespace EclipseWorks.Application.Users.Handlers
 
         public async Task<Response> Handle(GetAllUsersQuery request, CancellationToken cancellationToken)
         {
-            return Response.FromData(await queryUserRepository.GetAllAsync());
+            IEnumerable<UserEntity> users = await queryUserRepository.GetAllAsync(cancellationToken: cancellationToken);
+            return Response.FromData(UsersQueryResponse.ToModel(users));
         }
     }
 }

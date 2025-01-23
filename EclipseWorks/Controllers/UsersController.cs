@@ -1,4 +1,5 @@
-﻿using EclipseWorks.Application.Users.Queries;
+﻿using EclipseWorks.Application.Projects.Queries;
+using EclipseWorks.Application.Users.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -6,11 +7,11 @@ namespace EclipseWorks.Controllers
 {
     [ApiController]
     [Route("api/v1/[controller]")]
-    public class UserController : BaseController
+    public class UsersController : BaseController
     {
         private readonly ISender mediatr;
 
-        public UserController(ISender mediatr)
+        public UsersController(ISender mediatr)
         {
             this.mediatr = mediatr;
         }
@@ -22,6 +23,15 @@ namespace EclipseWorks.Controllers
         public async Task<IActionResult> GetAllUsers()
         {
             return await HandleResponse(async () => await mediatr.Send(new GetAllUsersQuery()));
+        }
+
+        /// <summary>
+        /// Obtém todos os projetos filtrados
+        /// </summary>
+        [HttpGet("{userId}/projects")]
+        public async Task<IActionResult> GetAllProjects(Guid userId)
+        {
+            return await HandleResponse(async () => await mediatr.Send(new GetAllProjectsByUserQuery(userId)));
         }
     }
 }

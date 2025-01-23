@@ -24,7 +24,7 @@ namespace EclipseWorks.Application.Commentaries.Handlers
 
         public async Task<Response> Handle(AddCommentaryCommand request, CancellationToken cancellationToken)
         {
-            ISpecification<TaskEntity> spec = GetByIdSpecification<TaskEntity>.Create(request.Body.TaskId);
+            ISpecification<TaskEntity> spec = GetByIdSpecification<TaskEntity>.Create(request.TaskId);
             TaskEntity task = await queryTaskRepository.GetAsync(spec, cancellationToken);
             
             if(task is null)

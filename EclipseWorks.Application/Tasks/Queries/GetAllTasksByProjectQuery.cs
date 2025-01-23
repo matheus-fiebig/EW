@@ -3,5 +3,5 @@ using MediatR;
 
 namespace EclipseWorks.Application.Tasks.Queries
 {
-    public sealed record GetAllTasksByProjectQuery(Guid? ProjectId) : IRequest<Response>;
+    public sealed record GetAllTasksByProjectQuery(Guid ProjectId) : IRequest<Response>;
 }

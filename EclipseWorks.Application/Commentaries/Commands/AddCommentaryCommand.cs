@@ -4,5 +4,5 @@ using MediatR;
 
 namespace EclipseWorks.Application.Commentaries.Commands
 {
-    public sealed record AddCommentaryCommand(AddCommentaryRequest Body) : IRequest<Response>;
+    public sealed record AddCommentaryCommand(Guid TaskId, AddCommentaryRequest Body) : IRequest<Response>;
 }

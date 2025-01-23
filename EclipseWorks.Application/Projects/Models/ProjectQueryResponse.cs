@@ -8,7 +8,7 @@ namespace EclipseWorks.Application.Projects.Models
         public string Name { get; init; }
         public string Description { get; init; }
 
-        public static IEnumerable<ProjectQueryResponse> ToModel(List<ProjectEntity> entities)
+        public static IEnumerable<ProjectQueryResponse> ToModel(IEnumerable<ProjectEntity> entities)
         {
             return entities.Select(e => new ProjectQueryResponse()
             {

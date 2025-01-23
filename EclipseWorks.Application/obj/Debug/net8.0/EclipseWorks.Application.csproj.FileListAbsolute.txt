@@ -13,3 +13,4 @@ C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Ap
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Application\obj\Debug\net8.0\refint\EclipseWorks.Application.dll
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Application\obj\Debug\net8.0\EclipseWorks.Application.pdb
 C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Application\obj\Debug\net8.0\ref\EclipseWorks.Application.dll
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Application\obj\Debug\net8.0\EclipseWorks.Application.sourcelink.json
