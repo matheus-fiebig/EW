@@ -27,10 +27,10 @@ namespace EclipseWorks.Domain._Shared.Constants
         public const string TaskNotFoundDesc = "Tarefa não encontrada.";
 
         public const string CommentaryNullCode = "000009";
-        public const string CommentaryNullDesc = "Comentario vazio ou nulo.";
+        public const string CommentaryNullDesc = "Comentário vazio ou nulo.";
 
         public const string UserNotFoundCode = "000010";
-        public const string UserNotFoundDesc = "Usuario não encontrado.";
+        public const string UserNotFoundDesc = "Usuário não encontrado.";
 
         public const string ProjectMinUserCode = "000000";
         public const string ProjectMinUserDesc = "Numero de usuários invalido. Min: 1.";
