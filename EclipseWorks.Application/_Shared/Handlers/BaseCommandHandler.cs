@@ -1,9 +1,10 @@
-﻿using EclipseWorks.Domain._Shared.Interfaces.UOW;
+﻿using EclipseWorks.Application._Shared.Models;
+using EclipseWorks.Domain._Shared.Interfaces.UOW;
 using MediatR;
 
 namespace EclipseWorks.Application._Shared.Handlers
 {
-    public abstract class BaseCommandHandler<TEntity, TResponse> : IRequestHandler<TEntity, TResponse> where TEntity : IRequest<TResponse>
+    public abstract class BaseCommandHandler<TEntity, TResponse> : IRequestHandler<TEntity, Response> where TEntity : IRequest<Response>
     {
         protected readonly IUnitOfWork unitOfWork;
 
@@ -12,12 +13,20 @@ namespace EclipseWorks.Application._Shared.Handlers
             this.unitOfWork = unitOfWork;
         }
 
-        public async Task<TResponse> Handle(TEntity request, CancellationToken cancellationToken)
+        public async Task<Response> Handle(TEntity request, CancellationToken cancellationToken)
         {
             try
             {
                 await unitOfWork.BeginTrasactionAsync();
-                return await TryHandle(request, cancellationToken);
+                Response response = await TryHandle(request, cancellationToken);
+                
+                if(response.Errors != null && response.Errors.Any())
+                {
+                    await unitOfWork.RollbackTrasactionAsync();
+                }
+
+                await unitOfWork.CommitTransactionAsync();
+                return response;
             }
             catch (Exception)
             {
@@ -26,6 +35,6 @@ namespace EclipseWorks.Application._Shared.Handlers
             }
         }
 
-        protected abstract Task<TResponse> TryHandle(TEntity request, CancellationToken cancellationToken);
+        protected abstract Task<Response> TryHandle(TEntity request, CancellationToken cancellationToken);
     }
 }

@@ -32,20 +32,16 @@ namespace EclipseWorks.Application.Commentaries.Handlers
 
             if (task is null)
             {
-                await unitOfWork.RollbackTrasactionAsync();
                 return Issue.CreateNew(ErrorConstants.TaskNotFoundCode, ErrorConstants.TaskNotFoundDesc);
             }
 
             ValidationObject<TaskEntity> validationObject = task.AddCommentary(request.Body.Commentary, request.Body.UserId);
             if (validationObject.HasIssue)
             {
-                await unitOfWork.RollbackTrasactionAsync();
                 return validationObject.Issue;
             }
 
             var entity = await commandTaskRepository.UpdateAsync(validationObject.Entity, cancellationToken);
-            await unitOfWork.CommitTransactionAsync();
-
             return Response.FromData(CommentaryQueryResponse.ToModel(entity.Commentaries.LastOrDefault()));
         }
     }

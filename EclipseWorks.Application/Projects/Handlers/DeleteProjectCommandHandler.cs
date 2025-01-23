@@ -30,7 +30,6 @@ namespace EclipseWorks.Application.Projects.Handlers
             ProjectEntity project = await queryProjectRepository.GetAsync(spec, cancellationToken);
             if (project is null)
             {
-                await unitOfWork.RollbackTrasactionAsync();
                 return Response.FromError(Issue.CreateNew(ErrorConstants.ProjectNotFoundCode, ErrorConstants.ProjectNotFoundDesc));
             }
 
@@ -38,12 +37,10 @@ namespace EclipseWorks.Application.Projects.Handlers
 
             if (value.HasIssue)
             {
-                await unitOfWork.RollbackTrasactionAsync();
                 return Response.FromError(value.Issue);
             }
 
             await commandProjectRepository.DeleteAsync(spec, cancellationToken);
-            await unitOfWork.CommitTransactionAsync();
             return Response.Empty();
         }
     }

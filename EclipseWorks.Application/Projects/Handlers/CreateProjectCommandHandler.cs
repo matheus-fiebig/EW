@@ -31,13 +31,10 @@ namespace EclipseWorks.Application.Projects.Handlers
 
             if (eitherIssueOrProject.HasIssue)
             {
-                await unitOfWork.RollbackTrasactionAsync();
                 return Response.FromError(eitherIssueOrProject.Issue);
             }
 
             ProjectEntity project = await commandProjectRepository.InsertAsync(eitherIssueOrProject.Entity, cancellationToken);
-            await unitOfWork.CommitTransactionAsync();
-            
             return Response.FromData(project.Id);
         }
     }

@@ -31,7 +31,6 @@ namespace EclipseWorks.Application.Tasks.Handlers
             ValidationObject<Unit> addTaskEligibility = project.VerifyAddTaskEligibility();
             if(addTaskEligibility.HasIssue)
             {
-                await unitOfWork.RollbackTrasactionAsync();
                 return addTaskEligibility.Issue;
             }
 
@@ -41,12 +40,10 @@ namespace EclipseWorks.Application.Tasks.Handlers
                                                                                 project);
             if(taskCreation.HasIssue)
             {
-                await unitOfWork.RollbackTrasactionAsync();
                 return taskCreation.Issue;
             }
 
             TaskEntity task = await commandTaskRepository.InsertAsync(taskCreation.Entity, cancellationToken);
-            await unitOfWork.CommitTransactionAsync();
             return Response.FromData(task.Id);
         }
     }

@@ -8,7 +8,6 @@ using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain._Shared.Specifications;
 using EclipseWorks.Domain.Tasks.Entities;
 using EclipseWorks.Domain.Tasks.Interfaces;
-using MediatR;
 
 namespace EclipseWorks.Application.Tasks.Handlers
 {
@@ -25,13 +24,11 @@ namespace EclipseWorks.Application.Tasks.Handlers
         {
             if(request.TaskId == default)
             {
-                await unitOfWork.RollbackTrasactionAsync();
                 return Issue.CreateNew(ErrorConstants.InvalidRequestCode, ErrorConstants.InvalidRequestDesc);
             }
 
             ISpecification<TaskEntity> spec = GetByIdSpecification<TaskEntity>.Create(request.TaskId);
             await commandTaskRepository.DeleteAsync(spec, cancellationToken);
-            await unitOfWork.CommitTransactionAsync();
             return Response.Empty();
         }
     }

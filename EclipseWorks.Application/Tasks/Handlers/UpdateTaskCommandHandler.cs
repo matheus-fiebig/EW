@@ -29,7 +29,6 @@ namespace EclipseWorks.Application.Tasks.Handlers
 
             if(task is null)
             {
-                await unitOfWork.RollbackTrasactionAsync();
                 return Issue.CreateNew(ErrorConstants.TaskNotFoundCode, ErrorConstants.TaskNotFoundDesc);
             }
             
@@ -37,12 +36,10 @@ namespace EclipseWorks.Application.Tasks.Handlers
             ValidationObject<TaskEntity> validationObject = task.TryUpdate(body.Title, body.Description, body.DueDate, body.Progress);
             if(validationObject.HasIssue)
             {
-                await unitOfWork.RollbackTrasactionAsync();
                 return validationObject.Issue;
             }
 
             TaskEntity updatedEntity = await commandTaskRepository.UpdateAsync(validationObject.Entity, cancellationToken);
-            await unitOfWork.CommitTransactionAsync();
             return Response.FromData(TaskQueryResponse.ToModel(updatedEntity));
         }
     }
