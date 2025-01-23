@@ -1,0 +1,11 @@
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\obj\Debug\net8.0\EclipseWorks.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\obj\Debug\net8.0\EclipseWorks.Domain.AssemblyInfoInputs.cache
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\obj\Debug\net8.0\EclipseWorks.Domain.AssemblyInfo.cs
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\obj\Debug\net8.0\EclipseWorks.Domain.csproj.CoreCompileInputs.cache
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\bin\Debug\net8.0\EclipseWorks.Domain.deps.json
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\bin\Debug\net8.0\EclipseWorks.Domain.dll
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\bin\Debug\net8.0\EclipseWorks.Domain.pdb
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\obj\Debug\net8.0\EclipseWorks.Domain.dll
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\obj\Debug\net8.0\refint\EclipseWorks.Domain.dll
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\obj\Debug\net8.0\EclipseWorks.Domain.pdb
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Domain\obj\Debug\net8.0\ref\EclipseWorks.Domain.dll

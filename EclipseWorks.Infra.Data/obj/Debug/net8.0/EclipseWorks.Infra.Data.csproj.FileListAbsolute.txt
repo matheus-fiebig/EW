@@ -1,0 +1,17 @@
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.csproj.AssemblyReference.cache
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.AssemblyInfoInputs.cache
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.AssemblyInfo.cs
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.csproj.CoreCompileInputs.cache
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\bin\Debug\net8.0\EclipseWorks.Infra.Data.deps.json
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\bin\Debug\net8.0\EclipseWorks.Infra.Data.runtimeconfig.json
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\bin\Debug\net8.0\EclipseWorks.Infra.Data.dll
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\bin\Debug\net8.0\EclipseWorks.Infra.Data.pdb
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\bin\Debug\net8.0\EclipseWorks.Domain.dll
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\bin\Debug\net8.0\EclipseWorks.Domain.pdb
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseW.9F595B65.Up2Date
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.dll
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\refint\EclipseWorks.Infra.Data.dll
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.pdb
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\EclipseWorks.Infra.Data.genruntimeconfig.cache
+C:\Users\fiebi\OneDrive\Área de Trabalho\Stefanini\EclipseWorks\EclipseWorks.Infra.Data\obj\Debug\net8.0\ref\EclipseWorks.Infra.Data.dll
