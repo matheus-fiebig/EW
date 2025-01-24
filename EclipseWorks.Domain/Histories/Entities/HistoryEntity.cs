@@ -21,11 +21,6 @@ namespace EclipseWorks.Domain.Histories.Entities
             
         }
 
-        internal HistoryEntity(Guid id)
-        {
-            Id = id;
-        }
-
         public static HistoryEntity TryCreateNew(Guid? createdBy, string originTableName, object changes, EModificationType type = EModificationType.Created)
         {
             ArgumentNullException.ThrowIfNull(createdBy);
