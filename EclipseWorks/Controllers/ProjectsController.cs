@@ -1,8 +1,5 @@
 using EclipseWorks.Application.Projects.Commands;
 using EclipseWorks.Application.Projects.Models;
-using EclipseWorks.Application.Projects.Queries;
-using EclipseWorks.Application.Tasks.Commands;
-using EclipseWorks.Application.Tasks.Models;
 using EclipseWorks.Application.Tasks.Queries;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;

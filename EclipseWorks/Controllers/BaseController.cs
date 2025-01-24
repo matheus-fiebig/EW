@@ -1,5 +1,5 @@
 ﻿using EclipseWorks.Application._Shared.Models;
-using EclipseWorks.Domain._Shared.Models;
+using EclipseWorks.Domain._Shared.Constants;
 using Microsoft.AspNetCore.Mvc;
 using System.Net;
 
@@ -8,7 +8,7 @@ namespace EclipseWorks.Controllers
     [ApiController]
     public class BaseController : ControllerBase
     {
-        protected async Task<IActionResult> HandleResponse(Func<Task<Response>> func)
+        public async Task<IActionResult> HandleResponse(Func<Task<Response>> func)
         {
             try
             {
@@ -19,15 +19,14 @@ namespace EclipseWorks.Controllers
                     HttpStatusCode.OK => Ok(response),
                     HttpStatusCode.NoContent => NoContent(),
                     HttpStatusCode.BadRequest => BadRequest(response),
-                    HttpStatusCode.NotFound => NotFound(),
                     _ => StatusCode((int)response.StatusCode,response),
                 };
             }
             catch (Exception ex)
             {
                 return Problem(
-                    "Error",
-                    "Ocorreu um erro inesperado no servidor.",
+                    ErrorConstants.GenericBadRequestErrorCode,
+                    ErrorConstants.GenericBadRequestErrorDesc,
                     StatusCodes.Status500InternalServerError
                 );
             }

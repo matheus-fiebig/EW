@@ -61,5 +61,8 @@ namespace EclipseWorks.Domain._Shared.Constants
 
         public const string InvalidRequestCode = "000099";
         public const string InvalidRequestDesc = "Requisição invalida.";
+
+        public const string GenericBadRequestErrorCode = "000019";
+        public const string GenericBadRequestErrorDesc = "Ocorreu um erro inesperado no servidor.";
     }
 }

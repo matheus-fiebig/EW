@@ -1,27 +1,35 @@
 using EclipseWorks.Infra.Data.Context;
 using EclipseWorks.Infra.IOC;
+using System.Diagnostics.CodeAnalysis;
 
-var builder = WebApplication.CreateBuilder(args);
+[ExcludeFromCodeCoverage]
+internal class Program
+{
+    private static void Main(string[] args)
+    {
+        var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
-builder.Services.AddControllers();
+        // Add services to the container.
+        builder.Services.AddControllers();
 
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-builder.Services.InjectDependecies(builder.Configuration);
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        builder.Services.AddEndpointsApiExplorer();
+        builder.Services.AddSwaggerGen();
+        builder.Services.InjectDependecies(builder.Configuration);
 
-var app = builder.Build();
+        var app = builder.Build();
 
-app.Migrate<MainContext>();
+        app.Migrate<MainContext>();
 
-app.UseSwagger();
-app.UseSwaggerUI();
+        app.UseSwagger();
+        app.UseSwaggerUI();
 
-app.UseHttpsRedirection();
+        app.UseHttpsRedirection();
 
-app.UseAuthorization();
+        app.UseAuthorization();
 
-app.MapControllers();
+        app.MapControllers();
 
-app.Run();
+        app.Run();
+    }
+}
