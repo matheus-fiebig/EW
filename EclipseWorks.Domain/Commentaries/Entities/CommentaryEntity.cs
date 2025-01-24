@@ -26,6 +26,11 @@ namespace EclipseWorks.Domain.Commentaries.Entities
             
         }
 
+        internal CommentaryEntity(Guid id)
+        {
+            Id = id;
+        }
+
         public static ValidationObject<CommentaryEntity> TryCreateNew(string commentary, Guid userId, Guid taskId)
         {
             if(string.IsNullOrEmpty(commentary))
