@@ -12,7 +12,7 @@ using EclipseWorks.Domain.Tasks.Interfaces;
 
 namespace EclipseWorks.Application.Tasks.Handlers
 {
-    internal class CreateTaskCommandHandler : BaseCommandHandler<CreateTaskCommand, Response>
+    public class CreateTaskCommandHandler : BaseCommandHandler<CreateTaskCommand, Response>
     {
         private readonly IQueryProjectRepository queryProjectRepository;
         private readonly ICommandTaskRepository commandTaskRepository;

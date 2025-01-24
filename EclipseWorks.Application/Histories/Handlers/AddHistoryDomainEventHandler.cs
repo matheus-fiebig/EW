@@ -1,4 +1,4 @@
-﻿using EclipseWorks.Application._Shared;
+﻿using EclipseWorks.Application._Shared.Handlers;
 using EclipseWorks.Domain.Histories.Entities;
 using EclipseWorks.Domain.Histories.Events;
 using EclipseWorks.Domain.Histories.Interfaces;

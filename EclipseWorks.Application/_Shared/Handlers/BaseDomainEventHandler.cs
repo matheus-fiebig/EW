@@ -1,7 +1,7 @@
 ﻿using EclipseWorks.Domain._Shared.Events;
 using MediatR;
 
-namespace EclipseWorks.Application._Shared
+namespace EclipseWorks.Application._Shared.Handlers
 {
     public abstract class BaseDomainEventHandler<T> : INotificationHandler<T> where T : DomainEvent
     {
