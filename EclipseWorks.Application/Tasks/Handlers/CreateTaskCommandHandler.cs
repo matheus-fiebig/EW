@@ -1,6 +1,7 @@
 ﻿using EclipseWorks.Application._Shared.Handlers;
 using EclipseWorks.Application._Shared.Models;
 using EclipseWorks.Application.Tasks.Commands;
+using EclipseWorks.Application.Tasks.Models;
 using EclipseWorks.Domain._Shared.Interfaces.UOW;
 using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain._Shared.Specifications;
@@ -37,14 +38,14 @@ namespace EclipseWorks.Application.Tasks.Handlers
             var body = request.Body;
             ValidationObject<TaskEntity> taskCreation = TaskEntity.TryCreateNew(body.Title, body.Description,
                                                                                 body.DueDate, body.Priority,
-                                                                                project);
+                                                                                project, body.UserId, body.OwnerId);
             if(taskCreation.HasIssue)
             {
                 return taskCreation.Issue;
             }
 
             TaskEntity task = await commandTaskRepository.InsertAsync(taskCreation.Entity, cancellationToken);
-            return Response.FromData(task.Id);
+            return Response.FromData(TaskQueryResponse.ToModel(task));
         }
     }
 }

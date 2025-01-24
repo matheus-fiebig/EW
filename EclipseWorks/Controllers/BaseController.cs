@@ -23,7 +23,7 @@ namespace EclipseWorks.Controllers
                     _ => StatusCode((int)response.StatusCode,response),
                 };
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return Problem(
                     "Error",

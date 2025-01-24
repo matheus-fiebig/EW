@@ -1,7 +1,6 @@
 ﻿using EclipseWorks.Domain._Shared.Entities;
 using EclipseWorks.Domain._Shared.Interfaces.Repositories;
 using EclipseWorks.Domain._Shared.Interfaces.Specification;
-using EclipseWorks.Domain.Tasks.Entities;
 using EclipseWorks.Infra.Data.Context;
 using Microsoft.EntityFrameworkCore;
 

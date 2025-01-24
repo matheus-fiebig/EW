@@ -1,14 +1,19 @@
 ﻿using EclipseWorks.Application.Projects.Handlers;
+using EclipseWorks.Domain._Shared.Interfaces.UOW;
+using EclipseWorks.Domain.Histories.Interfaces;
 using EclipseWorks.Domain.Projects.Interfaces;
+using EclipseWorks.Domain.Reports.Interfaces;
 using EclipseWorks.Domain.Tasks.Interfaces;
 using EclipseWorks.Domain.Users.Entities;
 using EclipseWorks.Domain.Users.Interfaces;
+using EclipseWorks.Infra.Data;
 using EclipseWorks.Infra.Data.Context;
 using EclipseWorks.Infra.Data.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text.Json;
 
 namespace EclipseWorks.Infra.IOC
 {
@@ -23,6 +28,10 @@ namespace EclipseWorks.Infra.IOC
             services.AddScoped<IQueryProjectRepository, ProjectRepository>();
             services.AddScoped<ICommandProjectRepository, ProjectRepository>();
             services.AddScoped<IQueryUserRepository, UserRepository>();
+            services.AddScoped<ICommandHistoryRepository, HistoryRepository>();
+            services.AddScoped<IQueryReportRepository, ReportRepository>();
+
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
 
             services.AddDbContext<MainContext>(x =>
                 x.UseLazyLoadingProxies()

@@ -53,7 +53,8 @@ namespace EclipseWorks.Domain.Projects.Entities
             {
                 Name = name,
                 Description = desc,
-                Users = users!.ToList()
+                Users = users!.ToList(),
+                CreatedAt = DateTime.Now,
             };
         }
     }

@@ -32,14 +32,26 @@ namespace EclipseWorks.Domain._Shared.Constants
         public const string UserNotFoundCode = "000010";
         public const string UserNotFoundDesc = "Usuário não encontrado.";
 
-        public const string ProjectMinUserCode = "000000";
+        public const string ProjectMinUserCode = "000011";
         public const string ProjectMinUserDesc = "Numero de usuários invalido. Min: 1.";
 
-        public const string ProjectDeletionCode = "000000";
+        public const string ProjectDeletionCode = "000012";
         public const string ProjectDeletionDesc = "Existem tarefas pendentes nesse projeto. E necessário conclui-las ou remove-las antes de prosseguir.";
 
-        public const string TaskLimitExceededCode = "000000";
+        public const string TaskLimitExceededCode = "000013";
         public const string TaskLimitExceededDesc = "Limite de tarefas atingido para este projeto (20).";
+
+        public const string NullStartDateCode = "000014";
+        public const string NullStartDateDesc = "Data inicial deve ser informada.";
+
+        public const string NullEndDateCode = "000015";
+        public const string NullEndDateDesc = "Data final deve ser informada.";
+
+        public const string EndDateLowerThanStartingDateCode = "000016";
+        public const string EndDateLowerThanStartingDateDesc = "Data final não pode ser menor que a da inicial.";
+
+        public const string NotAuthorizedCode = "000017";
+        public const string NotAuthorizedDesc = "Sem permissão para realizar essa ação.";
 
         public const string InvalidRequestCode = "000099";
         public const string InvalidRequestDesc = "Requisição invalida.";

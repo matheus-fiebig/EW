@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EclipseWorks.Infra.Data.Migrations
 {
     [DbContext(typeof(MainContext))]
-    [Migration("20250123005813_InitialMigration")]
+    [Migration("20250124012028_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />
@@ -21,6 +21,9 @@ namespace EclipseWorks.Infra.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "9.0.0")
+                .HasAnnotation("Proxies:ChangeTracking", false)
+                .HasAnnotation("Proxies:CheckEquality", false)
+                .HasAnnotation("Proxies:LazyLoading", true)
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -36,6 +39,7 @@ namespace EclipseWorks.Infra.Data.Migrations
                         .HasColumnType("datetime");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("varchar");
 
@@ -54,6 +58,36 @@ namespace EclipseWorks.Infra.Data.Migrations
                     b.ToTable("Commentary", (string)null);
                 });
 
+            modelBuilder.Entity("EclipseWorks.Domain.Histories.Entities.HistoryEntity", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasDefaultValueSql("NEWID()");
+
+                    b.Property<string>("Changes")
+                        .IsRequired()
+                        .HasColumnType("varchar(MAX)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
+
+                    b.Property<Guid>("CreatedBy")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("OriginTableName")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("History", (string)null);
+                });
+
             modelBuilder.Entity("EclipseWorks.Domain.Projects.Entities.ProjectEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -61,11 +95,15 @@ namespace EclipseWorks.Infra.Data.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
+
                     b.Property<string>("Description")
                         .HasMaxLength(200)
                         .HasColumnType("varchar");
 
                     b.Property<string>("Name")
+                        .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("varchar");
 
@@ -81,11 +119,20 @@ namespace EclipseWorks.Infra.Data.Migrations
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
+
                     b.Property<string>("Description")
-                        .HasColumnType("varchar");
+                        .HasColumnType("varchar(MAX)");
+
+                    b.Property<DateTime>("DoneDate")
+                        .HasColumnType("datetime");
 
                     b.Property<DateTime>("DueDate")
                         .HasColumnType("datetime");
+
+                    b.Property<Guid>("OwnerId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Priority")
                         .HasColumnType("int");
@@ -97,10 +144,13 @@ namespace EclipseWorks.Infra.Data.Migrations
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasMaxLength(200)
                         .HasColumnType("varchar");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("OwnerId");
 
                     b.HasIndex("ProjectId");
 
@@ -113,6 +163,9 @@ namespace EclipseWorks.Infra.Data.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier")
                         .HasDefaultValueSql("NEWID()");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime");
 
                     b.Property<string>("Name")
                         .HasMaxLength(100)
@@ -151,9 +204,9 @@ namespace EclipseWorks.Infra.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("EclipseWorks.Domain.Users.Entities.UserEntity", "User")
-                        .WithMany()
+                        .WithMany("Commentaries")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("Task");
@@ -163,11 +216,19 @@ namespace EclipseWorks.Infra.Data.Migrations
 
             modelBuilder.Entity("EclipseWorks.Domain.Tasks.Entities.TaskEntity", b =>
                 {
+                    b.HasOne("EclipseWorks.Domain.Users.Entities.UserEntity", "Owner")
+                        .WithMany("Tasks")
+                        .HasForeignKey("OwnerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("EclipseWorks.Domain.Projects.Entities.ProjectEntity", "Project")
                         .WithMany("Tasks")
                         .HasForeignKey("ProjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Owner");
 
                     b.Navigation("Project");
                 });
@@ -195,6 +256,13 @@ namespace EclipseWorks.Infra.Data.Migrations
             modelBuilder.Entity("EclipseWorks.Domain.Tasks.Entities.TaskEntity", b =>
                 {
                     b.Navigation("Commentaries");
+                });
+
+            modelBuilder.Entity("EclipseWorks.Domain.Users.Entities.UserEntity", b =>
+                {
+                    b.Navigation("Commentaries");
+
+                    b.Navigation("Tasks");
                 });
 #pragma warning restore 612, 618
         }

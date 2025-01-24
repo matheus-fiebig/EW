@@ -1,6 +1,7 @@
 ﻿using EclipseWorks.Domain._Shared.Constants;
 using EclipseWorks.Domain._Shared.Entities;
 using EclipseWorks.Domain._Shared.Models;
+using EclipseWorks.Domain.Histories.Events;
 using EclipseWorks.Domain.Tasks.Entities;
 using EclipseWorks.Domain.Users.Entities;
 
@@ -8,17 +9,15 @@ namespace EclipseWorks.Domain.Commentaries.Entities
 {
     public class CommentaryEntity : Entity
     {
-        public Guid UserId { get; set; }
+        public Guid UserId { get; init; }
 
-        public Guid TaskId { get; set; }
+        public Guid TaskId { get; init; }
 
-        public string Description { get; set; }
+        public string Description { get; init; }
 
-        public DateTime CreatedAt { get; set; }
+        public virtual UserEntity User { get; init; }
 
-        public virtual UserEntity User { get; set; }
-
-        public virtual TaskEntity Task { get; set; }
+        public virtual TaskEntity Task { get; init; }
 
         protected CommentaryEntity()
         {
@@ -42,7 +41,9 @@ namespace EclipseWorks.Domain.Commentaries.Entities
                 return Issue.CreateNew(ErrorConstants.TaskNotFoundCode, ErrorConstants.TaskNotFoundDesc);
             }
 
-            return new CommentaryEntity { UserId = userId, TaskId = taskId, Description = commentary, CreatedAt = DateTime.Now };
+            CommentaryEntity commentaryObj = new (){ UserId = userId, TaskId = taskId, Description = commentary, CreatedAt = DateTime.Now };
+            commentaryObj.AddEvent(new AddHistoryDomainEvent("Commentary", userId, commentaryObj, _Shared.Enums.EModificationType.Created));
+            return commentaryObj;
         }
     }
 }

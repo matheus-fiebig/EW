@@ -16,9 +16,13 @@ namespace EclipseWorks.Application.Tasks.Models
 
         public DateTime DueDate { get; init; }
 
-        public EPriority Priority { get; init; }
+        public EPriority PriorityId { get; init; }
 
-        public EProgress Progress { get; init; }
+        public string PriorityDesc => PriorityId.ToString();
+
+        public EProgress ProgressId { get; init; }
+        
+        public string ProgressDesc => ProgressId.ToString();
 
         public IEnumerable<CommentaryQueryResponse> Commentaries { get; init; }
 
@@ -35,8 +39,8 @@ namespace EclipseWorks.Application.Tasks.Models
                 Title = e.Title,
                 Description = e.Description,
                 DueDate = e.DueDate,
-                Priority = e.Priority,
-                Progress = e.Progress,
+                PriorityId = e.Priority,
+                ProgressId = e.Progress,
                 Commentaries = CommentaryQueryResponse.ToModel(e.Commentaries)
             };
         }

@@ -22,6 +22,10 @@ namespace EclipseWorks.Infra.Data.Context.Configuration
             builder.Property(x => x.Role)
                 .HasColumnType("varchar")
                 .HasMaxLength(50);
+
+            builder.Property(x => x.CreatedAt)
+               .HasColumnType("datetime")
+               .IsRequired();
         }
     }
 }
