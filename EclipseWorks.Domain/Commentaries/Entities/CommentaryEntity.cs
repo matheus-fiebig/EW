@@ -4,7 +4,9 @@ using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain.Histories.Events;
 using EclipseWorks.Domain.Tasks.Entities;
 using EclipseWorks.Domain.Users.Entities;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleToAttribute("EclipseWorks.UnitTest")]
 namespace EclipseWorks.Domain.Commentaries.Entities
 {
     public class CommentaryEntity : Entity
@@ -22,6 +24,11 @@ namespace EclipseWorks.Domain.Commentaries.Entities
         protected CommentaryEntity()
         {
             
+        }
+
+        internal CommentaryEntity(Guid id)
+        {
+            Id = id;
         }
 
         public static ValidationObject<CommentaryEntity> TryCreateNew(string commentary, Guid userId, Guid taskId)

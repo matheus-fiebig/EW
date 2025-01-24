@@ -2,7 +2,9 @@
 using EclipseWorks.Domain.Commentaries.Entities;
 using EclipseWorks.Domain.Projects.Entities;
 using EclipseWorks.Domain.Tasks.Entities;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleToAttribute("EclipseWorks.UnitTest")]
 namespace EclipseWorks.Domain.Users.Entities
 {
     public class UserEntity : Entity
@@ -20,6 +22,11 @@ namespace EclipseWorks.Domain.Users.Entities
         protected UserEntity()
         {
 
+        }
+
+        internal UserEntity(Guid id)
+        {
+            Id = id;
         }
 
         public static UserEntity Create(string name, string role)

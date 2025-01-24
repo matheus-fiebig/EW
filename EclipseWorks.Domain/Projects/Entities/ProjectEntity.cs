@@ -3,7 +3,9 @@ using EclipseWorks.Domain._Shared.Entities;
 using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain.Tasks.Entities;
 using EclipseWorks.Domain.Users.Entities;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleToAttribute("EclipseWorks.UnitTest")]
 namespace EclipseWorks.Domain.Projects.Entities
 {
     public class ProjectEntity : Entity
@@ -19,6 +21,11 @@ namespace EclipseWorks.Domain.Projects.Entities
         protected ProjectEntity()
         {
 
+        }
+
+        internal ProjectEntity(Guid id)
+        {
+            Id = id;
         }
 
         public ValidationObject<Unit> VerifyDeletionEligibility()

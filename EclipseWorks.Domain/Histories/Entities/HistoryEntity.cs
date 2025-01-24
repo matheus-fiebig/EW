@@ -1,7 +1,9 @@
 ﻿using EclipseWorks.Domain._Shared.Entities;
 using EclipseWorks.Domain._Shared.Enums;
+using System.Runtime.CompilerServices;
 using System.Text.Json;
 
+[assembly: InternalsVisibleToAttribute("EclipseWorks.UnitTest")]
 namespace EclipseWorks.Domain.Histories.Entities
 {
     public class HistoryEntity : Entity
@@ -13,6 +15,16 @@ namespace EclipseWorks.Domain.Histories.Entities
         public EModificationType Type { get; init; }
 
         public Guid CreatedBy { get; init; }
+
+        protected HistoryEntity()
+        {
+            
+        }
+
+        internal HistoryEntity(Guid id)
+        {
+            Id = id;
+        }
 
         public static HistoryEntity TryCreateNew(Guid? createdBy, string originTableName, object changes, EModificationType type = EModificationType.Created)
         {

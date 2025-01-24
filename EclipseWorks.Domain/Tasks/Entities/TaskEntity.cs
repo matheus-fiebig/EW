@@ -6,36 +6,43 @@ using EclipseWorks.Domain.Commentaries.Entities;
 using EclipseWorks.Domain.Histories.Events;
 using EclipseWorks.Domain.Projects.Entities;
 using EclipseWorks.Domain.Users.Entities;
+using System.Runtime.CompilerServices;
 
+[assembly: InternalsVisibleToAttribute("EclipseWorks.UnitTest")]
 namespace EclipseWorks.Domain.Tasks.Entities
 {
     public class TaskEntity : Entity
     {
-        public string Title { get; private set; }
+        public string Title { get; internal set; }
 
-        public string Description { get; private set; }
+        public string Description { get; internal set; }
 
-        public Guid ProjectId { get; private set; }
+        public Guid ProjectId { get; internal set; }
 
-        public Guid OwnerId { get; private set; }
+        public Guid OwnerId { get; internal set; }
 
-        public DateTime DueDate { get; private set; }
+        public DateTime DueDate { get; internal set; }
 
-        public DateTime? DoneDate { get; private set; }
+        public DateTime? DoneDate { get; internal set; }
 
-        public EPriority Priority { get; private set; }
+        public EPriority Priority { get; internal set; }
 
-        public EProgress Progress { get; private set; }
+        public EProgress Progress { get; internal set; }
 
-        public virtual List<CommentaryEntity> Commentaries { get; private set; }
+        public virtual List<CommentaryEntity> Commentaries { get; internal set; }
 
-        public virtual ProjectEntity Project { get; private set; }
+        public virtual ProjectEntity Project { get; internal set; }
 
-        public virtual UserEntity Owner { get; private set; }
+        public virtual UserEntity Owner { get; internal set; }
 
         protected TaskEntity()
         {
             
+        }
+
+        internal TaskEntity(Guid id)
+        {
+            Id = id;
         }
 
         public ValidationObject<TaskEntity> TryUpdate(string title, string desc, DateTime? dueDate, EProgress? progress, Guid ownerId, Guid userId)
