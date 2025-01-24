@@ -60,6 +60,11 @@ namespace EclipseWorks.Domain.Tasks.Entities
                 return Issue.CreateNew(ErrorConstants.ProgressNullCode, ErrorConstants.ProgressNullDesc);
             }
 
+            if(!Enum.IsDefined(typeof(EProgress), progress.Value))
+            {
+                return Issue.CreateNew(ErrorConstants.ProgressNotFoundCode, ErrorConstants.ProgressNotFoundDesc);
+            }
+
             if(progress.Value == EProgress.Done)
             {
                 DoneDate = DateTime.Now;
@@ -115,6 +120,12 @@ namespace EclipseWorks.Domain.Tasks.Entities
             {
                 return Issue.CreateNew(ErrorConstants.ProjectNotFoundCode, ErrorConstants.ProjectNotFoundDesc);
             }
+
+            if (!Enum.IsDefined(typeof(EPriority), priority.Value))
+            {
+                return Issue.CreateNew(ErrorConstants.PriorityNotFoundCode, ErrorConstants.PriorityNotFoundDesc);
+            }
+
 
             TaskEntity task = new TaskEntity()
             {

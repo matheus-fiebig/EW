@@ -4,6 +4,6 @@ namespace EclipseWorks.Domain.Reports.Interfaces
 {
     public interface IQueryReportRepository 
     {
-        Task<GenericReportModel> GenerateReport(DateTime from, DateTime to);
+        Task<GenericReportModel> GenerateReport(DateTime from, DateTime to, CancellationToken cancellationToken = default);
     }
 }

@@ -48,7 +48,7 @@ namespace EclipseWorks.Application.Reports.Handlers
                 startingDate = DateTime.Now.AddDays(-30);
             }
 
-            var report = await queryReportRepository.GenerateReport(request.StartingDate.Value, request.EndingDate.Value);
+            var report = await queryReportRepository.GenerateReport(request.StartingDate.Value, request.EndingDate.Value, cancellationToken);
             return Response.FromData(report);
         }
     }

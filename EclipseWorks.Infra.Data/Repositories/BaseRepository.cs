@@ -62,9 +62,9 @@ namespace EclipseWorks.Infra.Data.Repositories
 
         public virtual async Task<TEntity> InsertAsync(TEntity entity, CancellationToken cancellationToken = default)
         {
-            _ = await _dbSet.AddAsync(entity, cancellationToken);
+            var addedEntity = await _dbSet.AddAsync(entity, cancellationToken);
             _ = await _context.SaveChangesAsync(cancellationToken);
-            return entity;
+            return addedEntity.Entity;
         }
 
         public virtual async Task<TEntity> UpdateAsync(TEntity entity, CancellationToken cancellationToken = default)

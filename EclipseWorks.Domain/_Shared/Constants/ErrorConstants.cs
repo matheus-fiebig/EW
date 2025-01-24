@@ -53,6 +53,12 @@ namespace EclipseWorks.Domain._Shared.Constants
         public const string NotAuthorizedCode = "000017";
         public const string NotAuthorizedDesc = "Sem permissão para realizar essa ação.";
 
+        public const string ProgressNotFoundCode = "000018";
+        public const string ProgressNotFoundDesc = "Progresso não encontrado.";
+
+        public const string PriorityNotFoundCode = "000018";
+        public const string PriorityNotFoundDesc = "Prioridade não encontrada.";
+
         public const string InvalidRequestCode = "000099";
         public const string InvalidRequestDesc = "Requisição invalida.";
     }

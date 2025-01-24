@@ -16,7 +16,7 @@ namespace EclipseWorks.Infra.Data.Repositories
             this.context = context;
         }
 
-        public async Task<GenericReportModel> GenerateReport(DateTime from, DateTime to)
+        public async Task<GenericReportModel> GenerateReport(DateTime from, DateTime to, CancellationToken cancellationToken = default)
         {
             var filter = (TaskEntity task) => task.DoneDate >= from && task.DoneDate <= to;
 
@@ -33,7 +33,7 @@ namespace EclipseWorks.Infra.Data.Repositories
                     OwnerName = b.FirstOrDefault()!.Name,
                     TotalPeriod = days
                 })
-                .ToListAsync();
+                .ToListAsync(cancellationToken);
 
             return new GenericReportModel
             {

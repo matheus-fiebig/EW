@@ -9,7 +9,6 @@ using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain._Shared.Specifications;
 using EclipseWorks.Domain.Tasks.Entities;
 using EclipseWorks.Domain.Tasks.Interfaces;
-using MediatR;
 
 namespace EclipseWorks.Application.Commentaries.Handlers
 {
@@ -42,7 +41,7 @@ namespace EclipseWorks.Application.Commentaries.Handlers
             }
 
             var entity = await commandTaskRepository.UpdateAsync(validationObject.Entity, cancellationToken);
-            return Response.FromData(CommentaryQueryResponse.ToModel(entity.Commentaries.LastOrDefault()));
+            return Response.FromData(CommentaryQueryResponse.ToModel(entity.Commentaries));
         }
     }
 }

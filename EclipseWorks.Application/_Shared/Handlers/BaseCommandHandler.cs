@@ -23,6 +23,7 @@ namespace EclipseWorks.Application._Shared.Handlers
                 if(response.Errors != null && response.Errors.Any())
                 {
                     await unitOfWork.RollbackTrasactionAsync();
+                    return response;
                 }
 
                 await unitOfWork.CommitTransactionAsync();
