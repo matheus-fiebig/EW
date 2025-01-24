@@ -2,7 +2,6 @@
 using EclipseWorks.Application._Shared.Models;
 using EclipseWorks.Application.Reports.Queries;
 using EclipseWorks.Domain._Shared.Constants;
-using EclipseWorks.Domain._Shared.Interfaces.Specification;
 using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain._Shared.Specifications;
 using EclipseWorks.Domain.Reports.Interfaces;
@@ -48,7 +47,7 @@ namespace EclipseWorks.Application.Reports.Handlers
                 startingDate = DateTime.Now.AddDays(-30);
             }
 
-            var report = await queryReportRepository.GenerateReport(request.StartingDate.Value, request.EndingDate.Value, cancellationToken);
+            var report = await queryReportRepository.GenerateReport(startingDate.Value, endingDate.Value, cancellationToken);
             return Response.FromData(report);
         }
     }

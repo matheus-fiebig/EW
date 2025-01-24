@@ -10,12 +10,17 @@ namespace EclipseWorks.Application.Projects.Models
 
         public static IEnumerable<ProjectQueryResponse> ToModel(IEnumerable<ProjectEntity> entities)
         {
-            return entities.Select(e => new ProjectQueryResponse()
+            return entities.Select(ToModel);
+        }
+
+        public static ProjectQueryResponse ToModel(ProjectEntity e)
+        {
+            return  new ProjectQueryResponse()
             {
                 Id = e.Id,
                 Name = e.Name,
                 Description = e.Description,
-            });
+            };
         }
     }
 }

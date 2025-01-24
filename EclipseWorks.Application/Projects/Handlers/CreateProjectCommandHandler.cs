@@ -1,6 +1,7 @@
 ﻿using EclipseWorks.Application._Shared.Handlers;
 using EclipseWorks.Application._Shared.Models;
 using EclipseWorks.Application.Projects.Commands;
+using EclipseWorks.Application.Projects.Models;
 using EclipseWorks.Domain._Shared.Interfaces.UOW;
 using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain.Projects.Entities;
@@ -35,7 +36,7 @@ namespace EclipseWorks.Application.Projects.Handlers
             }
 
             ProjectEntity project = await commandProjectRepository.InsertAsync(eitherIssueOrProject.Entity, cancellationToken);
-            return Response.FromData(project.Id);
+            return Response.FromData(ProjectQueryResponse.ToModel(project));
         }
     }
 }
