@@ -2,5 +2,5 @@
 
 namespace EclipseWorks.Application.Tasks.Models
 {
-    public sealed record CreateTaskRequest(Guid ProjectId, Guid UserId, string Title, string Description, DateTime DueDate, EPriority Priority, Guid OwnerId);
+    public sealed record CreateTaskRequest(Guid ProjectId, Guid LoggedUserId, string Title, string Description, DateTime DueDate, EPriority Priority, Guid OwnerId);
 }

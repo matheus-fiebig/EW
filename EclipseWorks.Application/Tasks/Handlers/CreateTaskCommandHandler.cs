@@ -2,6 +2,7 @@
 using EclipseWorks.Application._Shared.Models;
 using EclipseWorks.Application.Tasks.Commands;
 using EclipseWorks.Application.Tasks.Models;
+using EclipseWorks.Domain._Shared.Constants;
 using EclipseWorks.Domain._Shared.Interfaces.UOW;
 using EclipseWorks.Domain._Shared.Models;
 using EclipseWorks.Domain._Shared.Specifications;
@@ -28,7 +29,11 @@ namespace EclipseWorks.Application.Tasks.Handlers
         {
             ProjectEntity project = await queryProjectRepository.GetAsync(GetByIdSpecification<ProjectEntity>.Create(request.Body.ProjectId),
                                                                           cancellationToken);
-            
+            if (project is null)
+            {
+                return Issue.CreateNew(ErrorConstants.ProjectNotFoundCode, ErrorConstants.ProjectNotFoundDesc);
+            }
+
             ValidationObject<Unit> addTaskEligibility = project.VerifyAddTaskEligibility();
             if(addTaskEligibility.HasIssue)
             {
@@ -38,7 +43,7 @@ namespace EclipseWorks.Application.Tasks.Handlers
             var body = request.Body;
             ValidationObject<TaskEntity> taskCreation = TaskEntity.TryCreateNew(body.Title, body.Description,
                                                                                 body.DueDate, body.Priority,
-                                                                                project, body.UserId, body.OwnerId);
+                                                                                project, body.OwnerId,body.LoggedUserId);
             if(taskCreation.HasIssue)
             {
                 return taskCreation.Issue;

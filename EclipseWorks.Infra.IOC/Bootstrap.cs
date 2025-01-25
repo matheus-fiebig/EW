@@ -51,7 +51,7 @@ namespace EclipseWorks.Infra.IOC
 
                     if(!db.Set<UserEntity>().Any())
                     {
-                        db.Add(UserEntity.Create("Davi", "admin"));
+                        db.Add(UserEntity.Create("Davi", "gerente"));
                         db.Add(UserEntity.Create("Brito", "usuario"));
                         db.SaveChanges();
                     }

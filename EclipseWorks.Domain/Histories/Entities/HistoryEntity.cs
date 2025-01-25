@@ -30,7 +30,7 @@ namespace EclipseWorks.Domain.Histories.Entities
             JsonSerializerOptions jsonOpts = new JsonSerializerOptions()
             {
                 MaxDepth = 0,
-                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles
+                ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles,
             };
 
             return new()

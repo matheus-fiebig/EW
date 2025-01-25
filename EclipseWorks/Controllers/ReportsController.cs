@@ -18,9 +18,9 @@ namespace EclipseWorks.Controllers
         /// Obtém dados do relatório
         /// </summary>
         [HttpGet]
-        public async Task<IActionResult> GetGenericReportData([FromQuery] Guid userId, [FromQuery] DateTime? from, [FromQuery] DateTime? to)
+        public async Task<IActionResult> GetGenericReportData([FromQuery] Guid loggedUserId, [FromQuery] DateTime? from, [FromQuery] DateTime? to)
         {
-            return await HandleResponse(async () => await mediatr.Send(new GetGenericReportQuery(userId, from, to)));
+            return await HandleResponse(async () => await mediatr.Send(new GetGenericReportQuery(loggedUserId, from, to)));
         }
     }
 }

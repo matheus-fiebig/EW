@@ -34,7 +34,7 @@ namespace EclipseWorks.Application.Commentaries.Handlers
                 return Issue.CreateNew(ErrorConstants.TaskNotFoundCode, ErrorConstants.TaskNotFoundDesc);
             }
 
-            ValidationObject<TaskEntity> validationObject = task.AddCommentary(request.Body.Commentary, request.Body.UserId);
+            ValidationObject<TaskEntity> validationObject = task.AddCommentary(request.Body.Commentary, request.Body.LoggedUserId);
             if (validationObject.HasIssue)
             {
                 return validationObject.Issue;

@@ -33,7 +33,7 @@ namespace EclipseWorks.Application.Tasks.Handlers
             }
             
             var body = request.Body;
-            ValidationObject<TaskEntity> validationObject = task.TryUpdate(body.Title, body.Description, body.DueDate, body.Progress, body.OwnerId, body.UserId);
+            ValidationObject<TaskEntity> validationObject = task.TryUpdate(body.Title, body.Description, body.DueDate, body.Progress, body.OwnerId, body.LoggedUserId);
             if(validationObject.HasIssue)
             {
                 return validationObject.Issue;

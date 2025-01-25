@@ -3,5 +3,5 @@ using MediatR;
 
 namespace EclipseWorks.Application.Reports.Queries
 {
-    public sealed record GetGenericReportQuery(Guid UserId, DateTime? StartingDate, DateTime? EndingDate) : IRequest<Response>;
+    public sealed record GetGenericReportQuery(Guid LoggedUserId, DateTime? StartingDate, DateTime? EndingDate) : IRequest<Response>;
 }

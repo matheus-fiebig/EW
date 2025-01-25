@@ -7,6 +7,7 @@ using EclipseWorks.Domain.Histories.Events;
 using EclipseWorks.Domain.Projects.Entities;
 using EclipseWorks.Domain.Users.Entities;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 [assembly: InternalsVisibleToAttribute("EclipseWorks.UnitTest")]
 namespace EclipseWorks.Domain.Tasks.Entities
@@ -19,7 +20,7 @@ namespace EclipseWorks.Domain.Tasks.Entities
 
         public Guid ProjectId { get; internal set; }
 
-        public Guid OwnerId { get; internal set; }
+        public Guid? OwnerId { get; internal set; }
 
         public DateTime DueDate { get; internal set; }
 
@@ -29,10 +30,13 @@ namespace EclipseWorks.Domain.Tasks.Entities
 
         public EProgress Progress { get; internal set; }
 
-        public virtual List<CommentaryEntity> Commentaries { get; internal set; }
+        [JsonIgnore]
+        public virtual List<CommentaryEntity> Commentaries { get; internal set; } = new();
 
+        [JsonIgnore]
         public virtual ProjectEntity Project { get; internal set; }
 
+        [JsonIgnore]
         public virtual UserEntity Owner { get; internal set; }
 
         protected TaskEntity()
@@ -81,7 +85,7 @@ namespace EclipseWorks.Domain.Tasks.Entities
             Description = desc;
             DueDate = DueDate;
             Progress = progress.Value;
-            OwnerId = ownerId;
+            OwnerId = ownerId == Guid.Empty ? null : ownerId;
 
             AddEvent(new AddHistoryDomainEvent("Task", userId, this, EModificationType.Updated));
             
@@ -101,7 +105,7 @@ namespace EclipseWorks.Domain.Tasks.Entities
             return this;
         }
 
-        public static ValidationObject<TaskEntity> TryCreateNew(string title, string desc,  DateTime? dueDate, EPriority? priority, ProjectEntity project, Guid ownerId, Guid userId)
+        public static ValidationObject<TaskEntity> TryCreateNew(string title, string desc,  DateTime? dueDate, EPriority? priority, ProjectEntity project, Guid ownerId, Guid loggedUserId)
         {
             if(string.IsNullOrEmpty(title))
             {
@@ -143,10 +147,10 @@ namespace EclipseWorks.Domain.Tasks.Entities
                 Progress = EProgress.Todo,
                 ProjectId = project.Id,
                 CreatedAt = DateTime.Now,
-                OwnerId = ownerId,
+                OwnerId = ownerId == Guid.Empty ? null : ownerId
             };
 
-            task.AddEvent(new AddHistoryDomainEvent("Task", userId, task, EModificationType.Created));
+            task.AddEvent(new AddHistoryDomainEvent("Task", loggedUserId, task, EModificationType.Created));
 
             return task;
         }

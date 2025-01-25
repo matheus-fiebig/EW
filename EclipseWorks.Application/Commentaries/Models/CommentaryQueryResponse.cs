@@ -4,7 +4,7 @@ namespace EclipseWorks.Application.Commentaries.Models
 {
     public class CommentaryQueryResponse
     {
-        public string UserName { get; init; }
+        public string CommentaryOwnerName { get; init; }
 
         public string Description { get; init; }
 
@@ -14,7 +14,7 @@ namespace EclipseWorks.Application.Commentaries.Models
         {
             return new CommentaryQueryResponse()
             {
-                UserName = e.User.Name,
+                CommentaryOwnerName = e.User?.Name ?? string.Empty,
                 Description = e.Description,
                 CreatedAt = e.CreatedAt,
             };

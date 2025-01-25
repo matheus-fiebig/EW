@@ -23,7 +23,7 @@ namespace EclipseWorks.Application.Reports.Handlers
 
         protected override async Task<Response> TryHandle(GetGenericReportQuery request, CancellationToken cancellationToken)
         {
-            var user = await queryUserRepository.GetAsync(GetByIdSpecification<UserEntity>.Create(request.UserId), cancellationToken);
+            var user = await queryUserRepository.GetAsync(GetByIdSpecification<UserEntity>.Create(request.LoggedUserId), cancellationToken);
             if(user.Role.ToLower().Trim() != "gerente")
             {
                 return Issue.CreateNew(ErrorConstants.NotAuthorizedCode, ErrorConstants.NotAuthorizedDesc);
@@ -44,7 +44,7 @@ namespace EclipseWorks.Application.Reports.Handlers
 
             if (startingDate is null)
             {
-                startingDate = DateTime.Now.AddDays(-30);
+                startingDate = DateTime.Now.AddDays(-31);
             }
 
             var report = await queryReportRepository.GenerateReport(startingDate.Value, endingDate.Value, cancellationToken);

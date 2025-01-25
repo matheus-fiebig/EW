@@ -5,6 +5,7 @@ using EclipseWorks.Domain.Histories.Events;
 using EclipseWorks.Domain.Tasks.Entities;
 using EclipseWorks.Domain.Users.Entities;
 using System.Runtime.CompilerServices;
+using System.Text.Json.Serialization;
 
 [assembly: InternalsVisibleToAttribute("EclipseWorks.UnitTest")]
 namespace EclipseWorks.Domain.Commentaries.Entities
@@ -17,8 +18,10 @@ namespace EclipseWorks.Domain.Commentaries.Entities
 
         public string Description { get; init; }
 
+        [JsonIgnore]
         public virtual UserEntity User { get; init; }
 
+        [JsonIgnore]
         public virtual TaskEntity Task { get; init; }
 
         protected CommentaryEntity()
@@ -31,14 +34,14 @@ namespace EclipseWorks.Domain.Commentaries.Entities
             Id = id;
         }
 
-        public static ValidationObject<CommentaryEntity> TryCreateNew(string commentary, Guid userId, Guid taskId)
+        public static ValidationObject<CommentaryEntity> TryCreateNew(string commentary, Guid loggedUserId, Guid taskId)
         {
             if(string.IsNullOrEmpty(commentary))
             {
                 return Issue.CreateNew(ErrorConstants.CommentaryNullCode, ErrorConstants.CommentaryNullDesc);
             }
 
-            if (userId == default)
+            if (loggedUserId == default)
             {
                 return Issue.CreateNew(ErrorConstants.UserNotFoundCode, ErrorConstants.UserNotFoundDesc);
             }
@@ -48,8 +51,8 @@ namespace EclipseWorks.Domain.Commentaries.Entities
                 return Issue.CreateNew(ErrorConstants.TaskNotFoundCode, ErrorConstants.TaskNotFoundDesc);
             }
 
-            CommentaryEntity commentaryObj = new (){ UserId = userId, TaskId = taskId, Description = commentary, CreatedAt = DateTime.Now };
-            commentaryObj.AddEvent(new AddHistoryDomainEvent("Commentary", userId, commentaryObj, _Shared.Enums.EModificationType.Created));
+            CommentaryEntity commentaryObj = new (){ UserId = loggedUserId, TaskId = taskId, Description = commentary, CreatedAt = DateTime.Now };
+            commentaryObj.AddEvent(new AddHistoryDomainEvent("Commentary", loggedUserId, commentaryObj, _Shared.Enums.EModificationType.Created));
             return commentaryObj;
         }
     }

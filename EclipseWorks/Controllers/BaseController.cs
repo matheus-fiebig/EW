@@ -8,7 +8,7 @@ namespace EclipseWorks.Controllers
     [ApiController]
     public class BaseController : ControllerBase
     {
-        public async Task<IActionResult> HandleResponse(Func<Task<Response>> func)
+        protected async Task<IActionResult> HandleResponse(Func<Task<Response>> func)
         {
             try
             {

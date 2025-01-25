@@ -27,7 +27,7 @@ namespace EclipseWorks.Application.Projects.Handlers
 
         protected override async Task<Response> TryHandle(CreateProjectCommand request, CancellationToken cancellationToken)
         {
-            IEnumerable<UserEntity> users = await queryUserRepository.GetPagedAsync(-1, -1, GetByUsersIdSpecification.Create(request.Body.Users), cancellationToken);
+            IEnumerable<UserEntity> users = await queryUserRepository.GetPagedAsync(-1, -1, GetByUsersIdSpecification.Create(request.Body.ParticipantIds), cancellationToken);
             ValidationObject<ProjectEntity> eitherIssueOrProject = ProjectEntity.TryCreateNew(request.Body.Name, request.Body.Description, users);
 
             if (eitherIssueOrProject.HasIssue)

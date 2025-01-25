@@ -11,9 +11,9 @@
     {
         public Guid OwnerId { get; init; }
         public string OwnerName { get; init; }
-        public decimal TotalDoneTasks { get; init; }
-        public int TotalPendingTasks { get; init; }
+        public decimal TotalDoneTasksInPeriod { get; init; }
+        public int TotalPendingTasksInPeriod { get; init; }
         public int TotalPeriod { private get; init; }
-        public decimal AverageDoneTasks => TotalDoneTasks / TotalPeriod;
+        public decimal AverageDoneTasksPerDays => TotalDoneTasksInPeriod / TotalPeriod;
     }
 }

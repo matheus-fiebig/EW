@@ -56,13 +56,13 @@ namespace EclipseWorks.Domain._Shared.Constants
         public const string ProgressNotFoundCode = "000018";
         public const string ProgressNotFoundDesc = "Progresso não encontrado.";
 
-        public const string PriorityNotFoundCode = "000018";
+        public const string PriorityNotFoundCode = "000019";
         public const string PriorityNotFoundDesc = "Prioridade não encontrada.";
 
         public const string InvalidRequestCode = "000099";
         public const string InvalidRequestDesc = "Requisição invalida.";
 
-        public const string GenericBadRequestErrorCode = "000019";
+        public const string GenericBadRequestErrorCode = "000020";
         public const string GenericBadRequestErrorDesc = "Ocorreu um erro inesperado no servidor.";
     }
 }
