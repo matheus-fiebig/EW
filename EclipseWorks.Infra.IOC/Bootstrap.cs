@@ -13,7 +13,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.Diagnostics.CodeAnalysis;
 
 namespace EclipseWorks.Infra.IOC
 {
@@ -52,7 +51,7 @@ namespace EclipseWorks.Infra.IOC
                     if(!db.Set<UserEntity>().Any())
                     {
                         db.Add(UserEntity.Create("Davi", "gerente"));
-                        db.Add(UserEntity.Create("Brito", "usuario"));
+                        db.Add(UserEntity.Create("Lucas", "usuario"));
                         db.SaveChanges();
                     }
                 }
