@@ -1,66 +1,143 @@
-# Como Rodar
-Execute o comando:  
-- `docker compose up`  
-- **OBS**: Caso enfrente problemas ao tentar realizar o pull das imagens, acesse a pasta do usu·rio `\.docker` e exclua o arquivo `config`. **FaÁa um backup antes para evitar problemas**.  
+### Vis√£o geral:
+
+O time de desenvolvimento de uma empresa precisa de sua ajuda para criar um sistema de gerenciamento de tarefas. O objetivo √© desenvolver uma **API** que permita aos usu√°rios organizar e monitorar suas tarefas di√°rias, bem como colaborar com colegas de equipe.
 
 ---
 
-# ExplicaÁ„o Breve e Tecnologias  
-- Neste projeto, optei por utilizar o **Mediatr** para a criaÁ„o dos casos de uso. Dessa forma, cada caso de uso possui seu prÛprio handler. Acredito que isso proporciona maior organizaÁ„o, flexibilidade para criaÁ„o de eventos e maior objetividade no cÛdigo.  
-- AlÈm disso, estou utilizando o conceito de **domÌnio rico**, ou seja, toda a regra de negÛcio est· encapsulada dentro da entidade correspondente.  
-- Apesar de n„o utilizar dois bancos de dados distintos, o projeto segue organizado com base no padr„o **CQRS**.  
-- O banco de dados escolhido foi o **SQL Server**, utilizando o **Entity Framework** para a persistÍncia.  
+### Detalhes do App:
+
+**Usu√°rio**
+
+Pessoa que utiliza o aplicativo detentor de uma conta.
+
+**Projeto**
+
+Um projeto √© uma entidade que cont√©m v√°rias tarefas. Um usu√°rio pode criar, visualizar e gerenciar v√°rios projetos.
+
+**Tarefa**
+
+Uma tarefa √© uma unidade de trabalho dentro de um projeto. Cada tarefa possui um t√≠tulo, uma descri√ß√£o, uma data de vencimento e um status (pendente, em andamento, conclu√≠da).
+
+---
+
+### Fase 1: API Coding
+
+Para a primeira Sprint, foi estipulado o desenvolvimento de funcionalidades b√°sicas para o gerenciamento de tarefas. Desenvolva uma RESTful API capaz de responder a requisi√ß√µes feitas pelo aplicativo para os seguintes itens:
+
+1. **Listagem de Projetos** - listar todos os projetos do usu√°rio
+2. **Visualiza√ß√£o de Tarefas** - visualizar todas as tarefas de um projeto espec√≠fico
+3. **Cria√ß√£o de Projetos** - criar um novo projeto
+4. **Cria√ß√£o de Tarefas** - adicionar uma nova tarefa a um projeto
+5. **Atualiza√ß√£o de Tarefas** - atualizar o status ou detalhes de uma tarefa
+6. **Remo√ß√£o de Tarefas** - remover uma tarefa de um projeto
+
+**Regras de neg√≥cio:**
+
+1. **Prioridades de Tarefas:**
+    - Cada tarefa deve ter uma prioridade atribu√≠da (baixa, m√©dia, alta).
+    - N√£o √© permitido alterar a prioridade de uma tarefa depois que ela foi criada.
+2. **Restri√ß√µes de Remo√ß√£o de Projetos:**
+    - Um projeto n√£o pode ser removido se ainda houver tarefas pendentes associadas a ele.
+    - Caso o usu√°rio tente remover um projeto com tarefas pendentes, a API deve retornar um erro e sugerir a conclus√£o ou remo√ß√£o das tarefas primeiro.
+3. **Hist√≥rico de Atualiza√ß√µes:**
+    - Cada vez que uma tarefa for atualizada (status, detalhes, etc.), a API deve registrar um hist√≥rico de altera√ß√µes para a tarefa.
+    - O hist√≥rico de altera√ß√µes deve incluir informa√ß√µes sobre o que foi modificado, a data da modifica√ß√£o e o usu√°rio que fez a modifica√ß√£o.
+4. **Limite de Tarefas por Projeto:**
+    - Cada projeto tem um limite m√°ximo de 20 tarefas. Tentar adicionar mais tarefas do que o limite deve resultar em um erro.
+5. **Relat√≥rios de Desempenho:**
+    - A API deve fornecer endpoints para gerar relat√≥rios de desempenho, como o n√∫mero m√©dio de tarefas conclu√≠das por usu√°rio nos √∫ltimos 30 dias.
+    - Os relat√≥rios devem ser acess√≠veis apenas por usu√°rios com uma fun√ß√£o espec√≠fica de "gerente".
+6. **Coment√°rios nas Tarefas:**
+    - Os usu√°rios podem adicionar coment√°rios a uma tarefa para fornecer informa√ß√µes adicionais.
+    - Os coment√°rios devem ser registrados no hist√≥rico de altera√ß√µes da tarefa.
+
+**Regras da API e avalia√ß√£o:**
+
+1. **N√£o √©** **necess√°rio** nenhum tipo de CRUD para usu√°rios.
+2. **N√£o √© necess√°rio** nenhum tipo de autentica√ß√£o; este ser√° um servi√ßo externo.
+3. Tenha pelo menos **80%** de cobertura de testes de unidade para validar suas regras de neg√≥cio.
+4. **Utilize o git** como ferramenta de versionamento de c√≥digo.
+5. **Utilize um banco de dados** (o que preferir) para salvar os dados.
+6. **Utilize o framework e libs** que julgue necess√°rio para uma boa implementa√ß√£o.
+7. **O projeto deve executar no docker e as informa√ß√µes de execu√ß√£o via terminal devem estar dispon√≠veis no [README.md](http://README.md) do projeto**
+
+---
+
+### Fase 2: Refinamento
+
+Para a segunda fase, escreva no arquivo **README.md** em uma sess√£o dedicada, o que voc√™ perguntaria para o *PO* visando o refinamento para futuras implementa√ß√µes ou melhorias.
+
+---
+
+### Fase 3: Final
+
+Na terceira fase, escreva no arquivo **README.md** em uma sess√£o dedicada o que voc√™ melhoraria no projeto, identificando poss√≠veis pontos de melhoria, implementa√ß√£o de padr√µes, vis√£o do projeto sobre arquitetura/cloud, etc.
+
+---
+
+# Como Rodar
+Execute o comando:  
+- `docker compose up`  
+- **OBS**: Caso enfrente problemas ao tentar realizar o pull das imagens, acesse a pasta do usu√°rio `\.docker` e exclua o arquivo `config`. **Fa√ßa um backup antes para evitar problemas**.  
+
+---
+
+# Explica√ß√£o Breve e Tecnologias  
+- Neste projeto, optei por utilizar o **Mediatr** para a cria√ß√£o dos casos de uso. Dessa forma, cada caso de uso possui seu pr√≥prio handler. Acredito que isso proporciona maior organiza√ß√£o, flexibilidade para cria√ß√£o de eventos e maior objetividade no c√≥digo.  
+- Al√©m disso, estou utilizando o conceito de **dom√≠nio rico**, ou seja, toda a regra de neg√≥cio est√° encapsulada dentro da entidade correspondente.  
+- Apesar de n√£o utilizar dois bancos de dados distintos, o projeto segue organizado com base no padr√£o **CQRS**.  
+- O banco de dados escolhido foi o **SQL Server**, utilizando o **Entity Framework** para a persist√™ncia.  
 
 ---
 
 # Refinamento  
-- **Por que um projeto sÛ pode ter 20 tarefas?**  
-  Isso limita o planejamento antecipado de POs/PMs, entre outros. Talvez um limite configur·vel durante a criaÁ„o do projeto seja mais eficaz. Outra opÁ„o seria limitar o n˙mero de tarefas por progresso, como, por exemplo, um m·ximo de 10 tarefas no status "Fazendo".  
+- **Por que um projeto s√≥ pode ter 20 tarefas?**  
+  Isso limita o planejamento antecipado de POs/PMs, entre outros. Talvez um limite configur√°vel durante a cria√ß√£o do projeto seja mais eficaz. Outra op√ß√£o seria limitar o n√∫mero de tarefas por progresso, como, por exemplo, um m√°ximo de 10 tarefas no status "Fazendo".  
 
-- **RestriÁıes para alterar a prioridade das tarefas apÛs a criaÁ„o:**  
-  Essa restriÁ„o pode impactar negativamente ambientes altamente din‚micos. Uma soluÁ„o seria tornar essa regra configur·vel ou definir condiÁıes especÌficas, como restringir a alteraÁ„o apenas em determinados status, mas n„o em todos.  
+- **Restri√ß√µes para alterar a prioridade das tarefas ap√≥s a cria√ß√£o:**  
+  Essa restri√ß√£o pode impactar negativamente ambientes altamente din√¢micos. Uma solu√ß√£o seria tornar essa regra configur√°vel ou definir condi√ß√µes espec√≠ficas, como restringir a altera√ß√£o apenas em determinados status, mas n√£o em todos.  
 
-- **DeleÁ„o de projetos/tarefas:**  
-  A deleÁ„o do dado ser· fÌsica ou lÛgica (remover o registro ou so esconde-lo)?  
+- **Dele√ß√£o de projetos/tarefas:**  
+  A dele√ß√£o do dado ser√° f√≠sica ou l√≥gica (remover o registro ou so esconde-lo)?  
 
-- **HistÛrico de alteraÁıes:**  
-  O histÛrico ser· utilizado apenas para auditoria ou haver· alguma regra de negÛcio associada a ele no futuro?  
+- **Hist√≥rico de altera√ß√µes:**  
+  O hist√≥rico ser√° utilizado apenas para auditoria ou haver√° alguma regra de neg√≥cio associada a ele no futuro?  
 
-- **RelatÛrios e dados importantes:**  
-  Quais dados s„o essenciais para o negÛcio? Os relatÛrios ser„o especÌficos para cada situaÁ„o ou haver· um **dashboard** que permita filtragem? A solicitaÁ„o de relatÛrios est· muito genÈrica: n„o define quantos relatÛrios ser„o gerados nem o formato (Excel, PDF, dashboard).  
+- **Relat√≥rios e dados importantes:**  
+  Quais dados s√£o essenciais para o neg√≥cio? Os relat√≥rios ser√£o espec√≠ficos para cada situa√ß√£o ou haver√° um **dashboard** que permita filtragem? A solicita√ß√£o de relat√≥rios est√° muito gen√©rica: n√£o define quantos relat√≥rios ser√£o gerados nem o formato (Excel, PDF, dashboard).  
 
-- **ValidaÁıes de entrada e erros:**  
-  … importante solicitar ao PO uma lista de erros possÌveis (validaÁıes de entrada e regras de negÛcio, como campos nulos, limites de caracteres, etc.) para melhorar o retorno ao usu·rio. Caso o PO n„o forneÁa essa lista, eu realizaria as validaÁıes e encaminharia ao PO uma lista dos possÌveis erros, para que ele e o time de UI/UX validem as mensagens.  
+- **Valida√ß√µes de entrada e erros:**  
+  √â importante solicitar ao PO uma lista de erros poss√≠veis (valida√ß√µes de entrada e regras de neg√≥cio, como campos nulos, limites de caracteres, etc.) para melhorar o retorno ao usu√°rio. Caso o PO n√£o forne√ßa essa lista, eu realizaria as valida√ß√µes e encaminharia ao PO uma lista dos poss√≠veis erros, para que ele e o time de UI/UX validem as mensagens.  
 
-- **ServiÁo de autenticaÁ„o externo:**  
-  O serviÁo de autenticaÁ„o retorna o ID e o perfil do usu·rio, correto? Precisamos validar como esses dados ser„o mapeados no nosso sistema (necessidade de um de-para).  
+- **Servi√ßo de autentica√ß√£o externo:**  
+  O servi√ßo de autentica√ß√£o retorna o ID e o perfil do usu√°rio, correto? Precisamos validar como esses dados ser√£o mapeados no nosso sistema (necessidade de um de-para).  
 
 - **Mensagens de erro:**  
-  Ser· exibida apenas uma mensagem de erro por vez ou todas de uma vez?  
+  Ser√° exibida apenas uma mensagem de erro por vez ou todas de uma vez?  
 
 ---
 
 # Final  
 - **Agregador de mensagens de erro:**  
-  Pode ser necess·rio criar um agregador para facilitar o retorno de erros ao usu·rio. Uma soluÁ„o seria implementar uma classe de validador com dois modos: agregador e ˙nico, dependendo da necessidade. Sugiro um padr„o semelhante ao do FluentValidation (mas sem utiliz·-lo diretamente). Um exemplo pode ser encontrado [neste cÛdigo](https://github.com/matheus-fiebig/functional-validation-poc/blob/main/Application/Customers/Services/CustomerService.cs), no mÈtodo `CreateCustomer`.  
+  Pode ser necess√°rio criar um agregador para facilitar o retorno de erros ao usu√°rio. Uma solu√ß√£o seria implementar uma classe de validador com dois modos: agregador e √∫nico, dependendo da necessidade. Sugiro um padr√£o semelhante ao do FluentValidation (mas sem utiliz√°-lo diretamente). Um exemplo pode ser encontrado [neste c√≥digo](https://github.com/matheus-fiebig/functional-validation-poc/blob/main/Application/Customers/Services/CustomerService.cs), no m√©todo `CreateCustomer`.  
 
 - **Logs:**  
-  Embora este projeto ainda n„o contenha logs, È essencial incluÌ-los antes do GoLive.  
+  Embora este projeto ainda n√£o contenha logs, √© essencial inclu√≠-los antes do GoLive.  
 
 - **Soft delete vs. hard delete:**  
-  Considerar soft delete pode ser necess·rio, dependendo das decisıes do PO.  
+  Considerar soft delete pode ser necess√°rio, dependendo das decis√µes do PO.  
 
-- **Divis„o de contextos (Query e Command):**  
-  Pode ser ˙til caso o projeto cresÁa e seja necess·rio utilizar dois bancos (um para leitura e outro para escrita). Entretanto, neste momento inicial, essa abordagem pode gerar custos desnecess·rios e n„o ser priorit·ria para um MVP.  
+- **Divis√£o de contextos (Query e Command):**  
+  Pode ser √∫til caso o projeto cres√ßa e seja necess√°rio utilizar dois bancos (um para leitura e outro para escrita). Entretanto, neste momento inicial, essa abordagem pode gerar custos desnecess√°rios e n√£o ser priorit√°ria para um MVP.  
 
-- **OtimizaÁıes de performance:**  
+- **Otimiza√ß√µes de performance:**  
   Utilizar `AsNoTracking()` e configurar seu uso adequadamente para otimizar a performance.  
 
-- **ConfiguraÁıes sensÌveis:**  
-  Recomenda-se utilizar um **Key Vault** ou vari·veis de ambiente para armazenar configuraÁıes do `appsettings`.  
+- **Configura√ß√µes sens√≠veis:**  
+  Recomenda-se utilizar um **Key Vault** ou vari√°veis de ambiente para armazenar configura√ß√µes do `appsettings`.  
 
-- **MicroserviÁos e histÛrico:**  
-  Caso seja um microserviÁo, pode ser interessante criar uma **Minimal API** ou um **worker** exclusivo para salvar o histÛrico. PorÈm, isso implica em custos adicionais e deve ser avaliado se realmente È necess·rio.  
+- **Microservi√ßos e hist√≥rico:**  
+  Caso seja um microservi√ßo, pode ser interessante criar uma **Minimal API** ou um **worker** exclusivo para salvar o hist√≥rico. Por√©m, isso implica em custos adicionais e deve ser avaliado se realmente √© necess√°rio.  
 
 - **Escalabilidade:**  
-  Para melhorar a escalabilidade, pode ser interessante organizar os projetos por feature. Por exemplo, ao invÈs de utilizar uma estrutura como `EclipseWorks` e `EclipseWorks.Application`, seria mais eficiente algo como `Task.EclipseWorks` e `Task.EclipseWorks.Application`. Assim, no futuro, seria mais f·cil separar partes do projeto sem causar grandes impactos.
+  Para melhorar a escalabilidade, pode ser interessante organizar os projetos por feature. Por exemplo, ao inv√©s de utilizar uma estrutura como `EclipseWorks` e `EclipseWorks.Application`, seria mais eficiente algo como `Task.EclipseWorks` e `Task.EclipseWorks.Application`. Assim, no futuro, seria mais f√°cil separar partes do projeto sem causar grandes impactos.
